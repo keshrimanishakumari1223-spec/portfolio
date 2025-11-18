@@ -262,3 +262,41 @@ function initCursor() {
 // ===============================================
 console.log('%c👋 Welcome to my portfolio!', 'font-size: 20px; font-weight: bold; color: #6366f1;');
 console.log('%cLooking for a developer? Let\'s connect!', 'font-size: 14px; color: #8b5cf6;');
+
+// ===============================================
+// Contact Form Handler
+// ===============================================
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+        
+        // Create mailto link with form data
+        const mailtoLink = `mailto:keshrimanishakumari1223@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
+            `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+        )}`;
+        
+        // Open email client
+        window.location.href = mailtoLink;
+        
+        // Show success message
+        const submitBtn = contactForm.querySelector('.btn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+        submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+        
+        // Reset form
+        setTimeout(() => {
+            contactForm.reset();
+            submitBtn.innerHTML = originalText;
+            submitBtn.style.background = '';
+        }, 3000);
+    });
+}
